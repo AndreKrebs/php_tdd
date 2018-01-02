@@ -7,15 +7,13 @@ class Avaliador {
     
     public function avalia(Leilao $leilao) {
         foreach($leilao->getLances() as $lance) {
-            foreach($leilao->getLances() as $lance) {
-                if($lance->getValor() > $this->maiorDeTodos)
-                    $this->maiorDeTodos = $lance->getValor();
-                if($lance->getValor() < $this->menorDeTodos)
-                    $this->menorDeTodos = $lance->getValor();
-                
-                $this->somaLances += $lance->getValor();
-                $this->totalLances++;
-            }
+            if($lance->getValor() > $this->maiorDeTodos)
+                $this->maiorDeTodos = $lance->getValor();
+            if($lance->getValor() < $this->menorDeTodos)
+                $this->menorDeTodos = $lance->getValor();
+
+            $this->somaLances += $lance->getValor();
+            $this->totalLances++;
         }
     }
     
