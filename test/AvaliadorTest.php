@@ -49,8 +49,17 @@ class AvaliadorTest extends TestCase {
 
         $leiloeiro = new Avaliador();
         $leiloeiro->avalia($leilao);
+        
+        $somaLances = 0;
+        $totalLances = count($leilao->getLances());
+        
+        foreach($leilao->getLances() as $lance) {
+            $somaLances += $lance->getValor();
+        }
     
-        $this->assertEquals((250+300.22+400.35)/3, $leiloeiro->getMediaLances(), 0.0001);
+        $mediaEsperada = $somaLances/$totalLances;
+        
+        $this->assertEquals($mediaEsperada, $leiloeiro->getMediaLances(), 0.0001);
         
     }
 }
