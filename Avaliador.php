@@ -2,6 +2,8 @@
 class Avaliador {
     private $maiorDeTodos = -INF;
     private $menorDeTodos = INF;
+    private $somaLances = 0;
+    private $totalLances = 0;
     
     public function avalia(Leilao $leilao) {
         foreach($leilao->getLances() as $lance) {
@@ -10,6 +12,9 @@ class Avaliador {
                     $this->maiorDeTodos = $lance->getValor();
                 if($lance->getValor() < $this->menorDeTodos)
                     $this->menorDeTodos = $lance->getValor();
+                
+                $this->somaLances += $lance->getValor();
+                $this->totalLances++;
             }
         }
     }
@@ -22,5 +27,8 @@ class Avaliador {
         return $this->menorDeTodos;
     }
     
+    public function getMediaLances() {
+        return $this->somaLances/$this->totalLances;
+    }
     
 }
