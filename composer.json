@@ -1,0 +1,11 @@
+{
+    "name": "root/php_tdd",
+    "description": "Teste com TDD",
+    "authors": [
+        {
+            "name": "André Krebs",
+            "email": "andre.krebssilva@gmail.com"
+        }
+    ],
+    "require": {}
+}
