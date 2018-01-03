@@ -1,6 +1,5 @@
 <?php
-
-set_include_path('/var/www/html/php_tdd');
+//require_once 'vendor/autoload.php';
 
 require "Usuario.php";
 require "Lance.php";
