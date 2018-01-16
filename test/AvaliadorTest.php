@@ -119,4 +119,71 @@ class AvaliadorTest extends TestCase {
         $this->assertEquals(400, $leiloeiro->getMaiorLance());
     }
     
+    public function testTresMaioresDeCincoLances() {
+        $joao = new Usuario("Joao");
+        $renan = new Usuario("Renan");
+        $felipe = new Usuario("Felipe");
+
+        $leilao = new Leilao("Playstation 4");
+
+        // lances em ordem crescente
+        $listaLances = array(
+            new Lance($joao,100),
+            new Lance($felipe,200),
+            new Lance($renan,300),
+            new Lance($joao,400),
+            new Lance($renan,777)
+        );
+        
+        foreach($listaLances as $lance) {
+            $leilao->propoe($lance);
+        }
+        
+        
+        $leiloeiro = new Avaliador();
+        
+        $leiloeiro->avalia($leilao);
+        
+        // array_reverse(array_slice($listaLances, -3)): pega os ultimos três 
+        // lances e depois inverte a ordem do array para os valores ficarem do
+        // maior para o menor
+        $this->assertEquals(array_reverse(array_slice($listaLances, -3)), $leiloeiro->getTresMaiores());
+    }
+    
+    public function testDoisMaioresDeDois() {
+        $joao = new Usuario("Joao");
+        $renan = new Usuario("Renan");
+        $felipe = new Usuario("Felipe");
+
+        $leilao = new Leilao("Playstation 4");
+
+        // lances em ordem crescente
+        $listaLances = array(
+            new Lance($joao,100),
+            new Lance($felipe,200)
+        );
+        
+        foreach($listaLances as $lance) {
+            $leilao->propoe($lance);
+        }
+        
+        
+        $leiloeiro = new Avaliador();
+        
+        $leiloeiro->avalia($leilao);
+        
+        $this->assertEquals(array_reverse(array_slice($listaLances, -2)), $leiloeiro->getTresMaiores());
+    }
+    
+    public function testMaiorLanceDeNenhumLance() {
+
+        $leilao = new Leilao("Playstation 4");
+        
+        $leiloeiro = new Avaliador();
+        
+        $leiloeiro->avalia($leilao);
+        
+        $this->assertEquals(array(), $leiloeiro->getTresMaiores());
+    }
+    
 }
